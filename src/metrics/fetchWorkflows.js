@@ -1,7 +1,7 @@
 import { Gauge } from 'prom-client'
 
 import octokit from '../helper/octokit.js'
-import { workflow } from '../config.js'
+import { workflow } from '../configs.js'
 
 const mapStatus = {
   queued: 1,

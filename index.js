@@ -3,7 +3,7 @@ import { register } from 'prom-client'
 
 import fetchRunners from './src/metrics/fetchRunners.js'
 import fetchWorkflows from './src/metrics/fetchWorkflows.js'
-import { token, scrape_interval, port } from './src/config.js'
+import { token, scrape_interval, port } from './src/configs.js'
 
 const PORT = port || 9988
 

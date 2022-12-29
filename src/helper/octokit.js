@@ -2,7 +2,7 @@ import { Octokit } from 'octokit'
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods'
 import { Gauge } from 'prom-client'
 
-import { token } from '../config.js'
+import { token } from '../configs.js'
 
 const rateLimitGauge = new Gauge({
   name: 'github_rate_limit_remaining',

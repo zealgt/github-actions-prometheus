@@ -3,7 +3,7 @@ import fs from 'fs'
 
 let config = {}
 try {
-  config = yaml.load(fs.readFileSync('./config.yml', 'utf8'))
+  config = yaml.load(fs.readFileSync('./configs/config.yml', 'utf8'))
 } catch (e) {
   console.log(e.toString())
   process.exit()

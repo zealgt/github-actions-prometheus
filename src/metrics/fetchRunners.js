@@ -1,7 +1,7 @@
 import { Gauge } from 'prom-client'
 
 import octokit from '../helper/octokit.js'
-import { runner } from '../config.js'
+import { runner } from '../configs.js'
 
 const runnerGauge = new Gauge({
   name: 'github_runner_status',
