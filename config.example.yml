@@ -1,0 +1,13 @@
+token: github_personal_access_tokens_OR_fine_grained_access_tokens # require
+scrape_interval: 15 # optional
+port: 9988 # optional
+runner: # optional
+  enabled: true
+  org: organization_name
+workflow: # optional
+  enabled: true
+  owner: owner_name # apply to all list (optional)
+  list:
+    - owner: owner_name # override workflow.owner (optional)
+      repo: repo_name_1
+    - repo: repo_name_2
