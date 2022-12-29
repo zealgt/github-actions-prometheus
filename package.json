@@ -1,7 +1,7 @@
 {
   "name": "github-actions-prometheus",
   "version": "1.0.0",
-  "description": "GitHub prometheus exporter for check runner and workflow status",
+  "description": "GitHub Prometheus exporter for monitor self-host runners and workflows status",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
