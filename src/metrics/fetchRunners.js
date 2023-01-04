@@ -12,9 +12,10 @@ const runnerGauge = new Gauge({
 const fetchRunners = async () => {
   const { enabled, org } = runner
   if (enabled) {
-    const { data: { runners = [] } = {} } = await octokit.rest.actions.listSelfHostedRunnersForOrg({
-      org,
-    })
+    const { data: { runners = [] } = {} } =
+      (await octokit.rest.actions.listSelfHostedRunnersForOrg({
+        org,
+      })) || {}
 
     runners.forEach(({ id, name, os, status, busy }) => {
       runnerGauge.set({ id, name, os }, busy ? 2 : status === 'online' ? 1 : 0)
