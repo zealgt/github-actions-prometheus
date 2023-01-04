@@ -17,7 +17,27 @@ Docker image : https://hub.docker.com/repository/docker/zealgt/github-actions-pr
 
 ## Getting started
 
-#### docker-compose.yml
+#### Create Github access token
+
+You can use one of `Personal access tokens (classic)` or `Fine-grained personal access tokens`
+
+For `Personal access tokens (classic)`
+
+- Go to https://github.com/settings/tokens/new
+- Set Note and Expiration time
+- Set Scopes only `repo` and `admin:org` (see [image](https://github.com/zealgt/github-actions-prometheus/blob/main/doc/images/permission1.png))
+
+For `Fine-grained personal access tokens`
+
+- Go to https://github.com/settings/personal-access-tokens/new
+- Set Token name and Expiration time
+- Set Resource owner
+- Set Repository access
+- Set Permissions
+  - Repository permissions: Actions access level is Read-only (see [image](https://github.com/zealgt/github-actions-prometheus/blob/main/doc/images/permission2.png))
+  - Organization permissions: Self-hosted runners access level is Read-only (see [image](https://github.com/zealgt/github-actions-prometheus/blob/main/doc/images/permission3.png))
+
+#### Install via docker-compose.yml
 
 Create [config.yml](https://github.com/zealgt/github-actions-prometheus/blob/main/configs/config.example.yml) file at /etc/github-actions-exporter/config.yml
 
@@ -35,7 +55,7 @@ services:
     restart: unless-stopped
 ```
 
-## Config file
+## config.yml
 
 ```YAML
 token: github_personal_access_tokens_OR_fine_grained_access_tokens # require
@@ -76,3 +96,20 @@ github_workflow_status{name="repo_name_2",repo_name="repo_name_2",workflow_name=
 github_workflow_status{name="repo_name_3",repo_name="repo_name_3",workflow_name="Production"} 1
 github_workflow_status{name="repo_name_4",repo_name="repo_name_4",workflow_name="Production"} 1
 ```
+
+## Troubleshooting
+
+### HttpError: Bad credentials - GET ...
+
+- Make sure you have config a valid GitHub token (No expire)
+
+### HttpError: Not Found - GET /repos/ ...
+
+- Make sure you have grant a valid permision for GitHub token ([link](#create-github-access-token))
+- Make sure you config a valid `repo` name in `config.yml` file
+- Make sure you have permission to access the repository
+
+### HttpError: Must have admin rights to Repository. - GET /orgs/ ...
+
+- Make sure you have grant a valid permision for GitHub token ([link](#create-github-access-token))
+- Make sure you have permission to access the Self-host runner for config org
