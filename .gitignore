@@ -5,7 +5,7 @@ node_modules/
 
 .DS_Store
 
-config/config.yml
+configs/config.yml
 
 # Logs
 logs

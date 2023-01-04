@@ -6,8 +6,9 @@ runner: # optional
   org: organization_name
 workflow: # optional
   enabled: true
-  owner: owner_name # apply to all list (optional)
+  owner: owner_name # optional, apply to all list
   list:
-    - owner: owner_name # override workflow.owner (optional)
+    - owner: owner_name # optional, override workflow.owner
+      name: custom_name # optional, name for github_workflow_status
       repo: repo_name_1
     - repo: repo_name_2

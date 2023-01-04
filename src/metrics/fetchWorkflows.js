@@ -14,7 +14,7 @@ const mapStatus = {
 const workflowGauge = new Gauge({
   name: 'github_workflow_status',
   help: 'Latest workflow status for each repository (0=unknown, 1=queued, 2=in_progress, 3=cancelled, 4=failure, 5=success)',
-  labelNames: ['repo_name', 'workflow_name'],
+  labelNames: ['name', 'repo_name', 'workflow_name'],
 })
 
 const getWorkflowStatus = (status, conclusion) => {
@@ -41,14 +41,19 @@ const fetchWorkflows = async () => {
       .map((v, i) => {
         if (v.status === 'fulfilled') return v.value?.data?.workflow_runs?.[0]
         console.log(
-          `Error while fetch workflow for repository name ${repoList[i]} - ${v.reason.toString()}`
+          `Error while fetch workflow for repository name ${list[i].repo} - ${v.reason.toString()}`
         )
       })
       .filter((v) => v)
 
     workflowList.forEach(({ repository, name, status, conclusion }) => {
+      const { name: displayName } = list.find((v) => v.repo === repository.name) || {}
       workflowGauge.set(
-        { repo_name: repository.name, workflow_name: name },
+        {
+          name: displayName || repository.name,
+          repo_name: repository.name,
+          workflow_name: name,
+        },
         getWorkflowStatus(status, conclusion)
       )
     })
